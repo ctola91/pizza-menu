@@ -1,4 +1,3 @@
-import { actions } from 'react-redux-form';
 import { request, received, error } from '../shared/redux/baseActions';
 import {
   FETCH_PIZZAS_REQUEST,
@@ -71,7 +70,7 @@ export const deletePizza = id => async dispatch => {
   dispatch(request(DELETE_PIZZA_REQUEST));
   try {
     const response = await PizzaService.deletePizza(id);
-    dispatch(received(DELETE_PIZZA_SUCCESS, response.data));
+    dispatch(received(DELETE_PIZZA_SUCCESS, id));
   } catch (err) {
     dispatch(error(DELETE_PIZZA_ERROR));
     // eslint-disable-next-line

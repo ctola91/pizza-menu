@@ -27,7 +27,7 @@ export default function pizzaReducer(state = initialState, action) {
     }
     case DELETE_PIZZA_SUCCESS: {
       const { payload: id } = action;
-      const filteredPizzas = state.pizzas.filter(pizza => pizza.id !== id);
+      const filteredPizzas = state.pizzas.filter(pizza => pizza._id !== id);
       return getNewState(state, {
         pizzas: filteredPizzas,
       });
