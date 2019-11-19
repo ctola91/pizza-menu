@@ -2,12 +2,12 @@ import {
   FETCH_PIZZAS_SUCCESS,
   ADD_PIZZA_SUCCESS,
   DELETE_PIZZA_SUCCESS,
-  UPDATE_PIZZA_SUCCESS,
-} from '../actions/actionTypes';
-import { getNewState } from '../shared/utils/frontend';
+  UPDATE_PIZZA_SUCCESS
+} from "../actions/actionTypes";
+import { getNewState } from "../shared/utils/frontend";
 
 const initialState = {
-  pizzas: [],
+  pizzas: []
 };
 
 export default function pizzaReducer(state = initialState, action) {
@@ -15,31 +15,34 @@ export default function pizzaReducer(state = initialState, action) {
     case FETCH_PIZZAS_SUCCESS: {
       const { payload: pizzas } = action;
       return getNewState(state, {
-        pizzas,
+        pizzas
       });
     }
     case ADD_PIZZA_SUCCESS: {
       const { payload: pizza } = action;
       const newPizzas = [...state.pizzas, pizza];
       return getNewState(state, {
-        pizzas: newPizzas,
+        pizzas: newPizzas
       });
     }
     case DELETE_PIZZA_SUCCESS: {
       const { payload: id } = action;
       const filteredPizzas = state.pizzas.filter(pizza => pizza._id !== id);
       return getNewState(state, {
-        pizzas: filteredPizzas,
+        pizzas: filteredPizzas
       });
     }
     case UPDATE_PIZZA_SUCCESS: {
       const { payload: updatedPizza } = action;
-      const index = state.pizza.findIndex(
-        pizza => pizza.id === updatedPizza.id
+      const index = state.pizzas.findIndex(
+        pizza => pizza._id === updatedPizza._id
       );
-      state.pizzas[index] = updatedPizza;
+      const filteredPizzas = state.pizzas.filter(
+        pizza => pizza._id !== updatedPizza._id
+      );
+      filteredPizzas.splice(index, 0, updatedPizza);
       return getNewState(state, {
-        pizzas: state.pizzas,
+        pizzas: filteredPizzas
       });
     }
     default:

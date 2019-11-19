@@ -35,7 +35,7 @@ const deletePizza = async id => {
 };
 
 const updatePizza = async pizza => {
-  const response = await API.put(`${URL_PIZZAS}/${pizza.id}`, pizza);
+  const response = await API.put(`${URL_PIZZAS}/${pizza._id}`, pizza);
   if (response.error) {
     throw new Error('an error occurred while is updating');
   }
