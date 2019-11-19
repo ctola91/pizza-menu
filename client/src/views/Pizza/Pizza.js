@@ -3,6 +3,7 @@ import { array, func } from "prop-types";
 import { Container, Grid } from "semantic-ui-react";
 
 import PizzaTable from "./PizzaTable";
+import PizzaForm from "./PizzaForm";
 class Pizza extends Component {
   componentDidMount() {
     const { fetchPizzas } = this.props;
@@ -10,7 +11,13 @@ class Pizza extends Component {
   }
 
   render() {
-    const { pizzas, deletePizza, updatePizza } = this.props;
+    const {
+      pizzas,
+      deletePizza,
+      updatePizza,
+      addPizza,
+      resetPizzaForm
+    } = this.props;
     return (
       <div>
         <h1>Pizza Menu</h1>
@@ -19,10 +26,18 @@ class Pizza extends Component {
             <Grid.Row>
               <Grid.Column width={4}>
                 <h3>Add Pizza</h3>
+                <PizzaForm
+                  addPizza={addPizza}
+                  resetPizzaForm={resetPizzaForm}
+                />
               </Grid.Column>
               <Grid.Column width={8}>
                 <h3>Pizza</h3>
-                <PizzaTable pizzas={pizzas} deletePizza={deletePizza} updatePizza={updatePizza} />
+                <PizzaTable
+                  pizzas={pizzas}
+                  deletePizza={deletePizza}
+                  updatePizza={updatePizza}
+                />
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -34,7 +49,11 @@ class Pizza extends Component {
 
 Pizza.propTypes = {
   pizzas: array,
-  fetchPizzas: func
+  fetchPizzas: func,
+  addPizza: func,
+  deletePizza: func,
+  updatePizza: func,
+  resetPizzaForm: func
 };
 
 export default Pizza;

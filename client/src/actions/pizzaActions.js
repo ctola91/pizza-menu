@@ -17,6 +17,7 @@ import {
   DELETE_PIZZA_ERROR,
 } from './actionTypes';
 import PizzaService from '../services/PizzaService';
+import { actions } from 'react-redux-form';
 
 export const fetchPizzas = () => async dispatch => {
   dispatch(request(FETCH_PIZZAS_REQUEST));
@@ -76,4 +77,8 @@ export const deletePizza = id => async dispatch => {
     // eslint-disable-next-line
     console.log('AXIOS_ERROR:', err.response);
   }
+};
+
+export const resetPizzaForm = () => dispatch => {
+  dispatch(actions.reset('pizzaForm'));
 };
