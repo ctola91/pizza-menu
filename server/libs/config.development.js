@@ -1,10 +1,7 @@
 module.exports = {
-  database: "pizzaMenu",
-  username: "sa",
-  password: "sapassword",
-  params: {
-    host: "localhost",
-    port: "1433",
-    dialect: "mssql"
-  }
+  database: 'wedding-dev',
+  username: '',
+  password: '',
+  url: process.env.MONGODB_1_PORT_27017_TCP_ADDR || 'localhost',
+  port: process.env.MONGODB_1_PORT_27017_TCP_PORT || '27017',
 };

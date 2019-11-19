@@ -1,29 +1,19 @@
-import fs from 'fs';
-import path from 'path';
-import Sequelize from 'sequelize';
+import mongoose from 'mongoose';
+import q from 'q';
 
-let db = null;
+mongoose.Promise = q.Promise;
 
 module.exports = app => {
-    if (!db) {
-        const config = app.libs.config;
-        const sequelize = new Sequelize(
-            config.database,
-            config.username,
-            config.password,
-            config.params
-        );
-        db = {
-            sequelize,
-            Sequelize,
-            models: {}
-        };
-        const dir = path.join(__dirname, 'models');
-        fs.readdirSync(dir).forEach(file => {
-            const modelDir = path.join(dir, file);
-            const model = sequelize.import(modelDir);
-            db.models[model.name] = model;
-        });
-    }
-    return db;
-}
+  let config = app.libs.config;
+  let db;
+  if (!config.username && !config.password && config.username === '' && config.password === '') {
+    db = mongoose.connect('mongodb://' + config.url + ':' + config.port + '/' + config.database);
+  }
+  else {
+    db = mongoose.connect('mongodb://' + config.url + ':' + config.port + '/' + config.database, {
+      user: config.username,
+      pass: config.password
+    });
+  }
+  return db;
+};
