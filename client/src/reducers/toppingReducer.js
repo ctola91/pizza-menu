@@ -55,7 +55,7 @@ export default function toppingReducer(state = initialState, action) {
     }
     case ADD_TOPPING_BY_PIZZA_SUCCESS: {
       const { payload: topping } = action;
-      const newToppings = [...state.topping, topping];
+      const newToppings = [...state.toppings, topping];
       return getNewState(state, {
         toppings: newToppings,
       });

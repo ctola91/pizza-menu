@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { array, func } from "prop-types";
-import { Container, Grid } from "semantic-ui-react";
+import { Container, Grid, Button, Icon } from "semantic-ui-react";
 
 import ToppingsTable from "./ToppingsTable";
+import ToppingForm from './ToppingForm';
 import ToppingsFilter from "./ToppingsFilter";
 class Toppings extends Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class Toppings extends Component {
       fetchPizzas,
       fetchToppings,
       fetchToppingsByPizza,
+      addToppingByPizza,
       deleteTopping,
       updateTopping,
       addTopping,
@@ -30,7 +32,9 @@ class Toppings extends Component {
           <Grid>
             <Grid.Row>
               <Grid.Column width={4}>
-                <h3>Get By Pizza</h3>
+                <h3>Add Topping</h3>
+                <ToppingForm pizzas={pizzas} addToppingByPizza={addToppingByPizza} resetToppingForm={resetToppingForm} />
+                <h3>Filter By Pizza</h3>
                 <ToppingsFilter
                   toppings={toppings}
                   pizzas={pizzas}
@@ -40,7 +44,7 @@ class Toppings extends Component {
                 />
               </Grid.Column>
               <Grid.Column width={8}>
-                <h3>Topping</h3>
+                <h3>Toppings list</h3>
                 <ToppingsTable
                   toppings={toppings}
                   deleteTopping={deleteTopping}

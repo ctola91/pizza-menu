@@ -85,10 +85,10 @@ export const deleteTopping = id => async dispatch => {
   }
 };
 
-export const addToppingByPizza = (project, id) => async dispatch => {
+export const addToppingByPizza = (topping) => async dispatch => {
   dispatch(request(ADD_TOPPING_BY_PIZZA_REQUEST));
   try {
-    const response = await ToppingService.addToppingByPizza(project, id);
+    const response = await ToppingService.addToppingByPizza(topping);
     dispatch(received(ADD_TOPPING_BY_PIZZA_SUCCESS, response.data));
   } catch (err) {
     dispatch(error(ADD_TOPPING_BY_PIZZA_ERROR));
