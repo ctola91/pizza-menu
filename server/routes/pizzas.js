@@ -29,24 +29,24 @@ module.exports = app => {
     })
     .post((req, res) => {
       let id = req.params.id;
-      // let arrayToppings = req.body.toppings;
-      // // arrayToppings.forEach(topping => {
-      // //   Toppings.find({_id: topping}).then(res)
-      // // })
-      Toppings.findOne({ _id: topping })
+      Toppings.findOne({ _id: req.body.topping })
         .then(topping => {
-          console.log(topping);
           Pizzas.findOne({ _id: id })
             .then(pizza => {
-              let index = pizza.toppings.findIndex(t => t === topping._id);
+              let toppingsAdded = pizza.toppings;
+              console.log(toppingsAdded);
+              console.log(topping);
+              let index = toppingsAdded.findIndex(t => t === topping._id);
+              console.log(index);
               if (index === -1) {
-                Pizzas.findByIdAndUpdate(id, { topping }, { new: true })
+                toppingsAdded.push(topping);
+                Pizzas.findByIdAndUpdate(id, { toppings: toppingsAdded}, { new: true })
                   .then(result => res.status(200).json(result))
                   .catch(error => {
                     res.status(400).json({ msg: error.message });
                   });
               } else {
-                throw new Error("topping is part of the pizza");
+                res.status(406).json({msg: `currently ${topping.name} was added to pizza.`})
               }
             })
             .catch(err => {
