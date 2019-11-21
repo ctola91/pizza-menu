@@ -6,7 +6,13 @@ const PizzaSchema = new Schema({
   name: {
     type: String,
     required: true
-  }
+  },
+  toppings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Topping"
+    }
+  ]
 });
 
 module.exports = () => {

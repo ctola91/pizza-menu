@@ -6,11 +6,6 @@ const ToppingSchema = new Schema({
   name: {
     type: String,
     required: true
-  },
-  pizza: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Pizza",
-    required: true
   }
 });
 
