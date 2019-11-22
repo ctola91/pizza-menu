@@ -50,9 +50,7 @@ module.exports = app => {
           Pizzas.findOne({ _id: id })
             .then(pizza => {
               let toppingsAdded = pizza.toppings;
-              let index = toppingsAdded.findIndex(t => {
-                return t.equals(topping._id);
-              });
+              let index = toppingsAdded.findIndex(t => t.equals(topping._id));
               if (index === -1) {
                 toppingsAdded.push(topping);
                 Pizzas.findByIdAndUpdate(
@@ -78,26 +76,36 @@ module.exports = app => {
           res.status(412).json({ msg: err.message });
         });
     })
-    // .delete((req, res) => {
-    //   Pizzas.findByIdAndRemove({ _id: req.params.id })
-    //     .then(result => res.sendStatus(204))
-    //     .catch(error => {
-    //       res.status(412).json({ msg: error.message });
-    //     });
-    // })
-    .delete((req, res) => {
+    .put((req, res) => {
       let id = req.params.id;
-
-      Pizzas.findByIdAndUpdate(id, req.body, { new: true })
-        .then(result => {
-          if (result === undefined || result === null) {
-            res.status(404).json({ msg: "Pizza not found" });
-            return;
+      let toppingToRemove = req.body.topping;
+      Pizzas.findById(id)
+        .then(pizza => {
+          let index = pizza.toppings.findIndex(idT =>
+            idT.equals(toppingToRemove)
+          );
+          if (index > -1) {
+            let toppingsEdited = pizza.toppings;
+            toppingsEdited.splice(index, 1);
+            Pizzas.findByIdAndUpdate(
+              id,
+              { toppings: toppingsEdited },
+              { new: true }
+            )
+              .then(result => {
+                res.status(201).json(result);
+              })
+              .catch(err => {
+                res.status(404).json({ msg: err.message });
+              });
+          } else {
+            res.status(404).json({
+              msg: `Topping '${req.body.topping}' was not found on this pizza`
+            });
           }
-          res.json(result);
         })
         .catch(error => {
-          res.status(412).json({ msg: error.message });
+          res.status(404).json({ msg: error.message });
         });
     });
 };

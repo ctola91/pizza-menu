@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b4ac56c5-7b87-4650-adbe-a89813d8b4b7",
+		"_postman_id": "1436ea16-ca82-4202-8ffe-726674159e86",
 		"name": "pizza-menu",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"test 4\"\n}",
+							"raw": "{\n\t\"name\": \"pizza 1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -68,7 +68,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pizzas",
+							"raw": "http://localhost:3000/pizzas?limit=5&page=0&sort=asc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -76,6 +76,20 @@
 							"port": "3000",
 							"path": [
 								"pizzas"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "asc"
+								}
 							]
 						}
 					},
@@ -156,6 +170,78 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "add topping to pizza",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"topping\": \"5dd7337d1e430410395aa17c\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pizzas/5dd733511e430410395aa17b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pizzas",
+								"5dd733511e430410395aa17b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove topping from pizza",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"topping\": \"5dd738d91bf8f21af23f3576\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pizzas/5dd7443a7043af1fa167248e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pizzas",
+								"5dd7443a7043af1fa167248e"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -177,7 +263,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"topping 1\"\n}",
+							"raw": "{\n\t\"name\": \"topping 3\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,36 +271,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pizzas/5dd401e2881dcd224c0675ea/toppings",
+							"raw": "http://localhost:3000/toppings",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"pizzas",
-								"5dd401e2881dcd224c0675ea",
-								"toppings"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "list toppings by pizza",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/pizzas/5dd401e2881dcd224c0675ea/toppings",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"pizzas",
-								"5dd401e2881dcd224c0675ea",
 								"toppings"
 							]
 						}
@@ -300,15 +363,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/pizzas/5dd401e2881dcd224c0675ea/toppings/5dd40589226ff72fa004ac41",
+							"raw": "http://localhost:3000/toppings/5dd40589226ff72fa004ac41",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"pizzas",
-								"5dd401e2881dcd224c0675ea",
 								"toppings",
 								"5dd40589226ff72fa004ac41"
 							]
