@@ -21,8 +21,11 @@ module.exports = app => {
   app
     .route("/pizzas/:id")
     .get((req, res) => {
-      Pizzas.findOne({ _id: req.params.id })
-        .then(result => res.json(result))
+      Pizzas.findOne({ _id: req.params.id }).populate('toppings')
+        .then(result => {
+          Toppings.find({})  
+          res.json(result)
+        })
         .catch(error => {
           res.status(404).json({ msg: error.message });
         });
@@ -34,19 +37,26 @@ module.exports = app => {
           Pizzas.findOne({ _id: id })
             .then(pizza => {
               let toppingsAdded = pizza.toppings;
-              console.log(toppingsAdded);
-              console.log(topping);
-              let index = toppingsAdded.findIndex(t => t === topping._id);
-              console.log(index);
+              let index = toppingsAdded.findIndex(t => {
+                return t.equals(topping._id);
+              });
               if (index === -1) {
                 toppingsAdded.push(topping);
-                Pizzas.findByIdAndUpdate(id, { toppings: toppingsAdded}, { new: true })
+                Pizzas.findByIdAndUpdate(
+                  id,
+                  { toppings: [...new Set(toppingsAdded)] },
+                  { new: true }
+                )
                   .then(result => res.status(200).json(result))
                   .catch(error => {
                     res.status(400).json({ msg: error.message });
                   });
               } else {
-                res.status(406).json({msg: `currently ${topping.name} was added to pizza.`})
+                res
+                  .status(406)
+                  .json({
+                    msg: `currently Topping '${topping.name}' was added to pizza.`
+                  });
               }
             })
             .catch(err => {

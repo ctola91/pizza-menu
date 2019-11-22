@@ -1,5 +1,5 @@
 module.exports = {
-  database: 'wedding-dev',
+  database: 'pizzas-dev',
   username: '',
   password: '',
   url: process.env.MONGODB_1_PORT_27017_TCP_ADDR || 'localhost',
