@@ -51,25 +51,6 @@ module.exports = app => {
     });
 
   app
-    .route("/pizzas/:pizzaId/toppings")
-    .get((req, res) => {
-      Toppings.find({ pizza: req.params.pizzaId })
-        .then(result => res.json(result))
-        .catch(error => {
-          res.status(412).json({ msg: error.message });
-        });
-    })
-    .post((req, res) => {
-      let pizzaId = req.params.pizzaId;
-      let pizza = { name: req.body.name, pizza: pizzaId };
-      Toppings.create(pizza)
-        .then(result => res.json(result))
-        .catch(error => {
-          res.status(412).json({ msg: error.message });
-        });
-    });
-
-  app
     .route("/pizzas/:pizzaId/toppings/:id")
     .get((req, res) => {
       Toppings.findOne({

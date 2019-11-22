@@ -44,7 +44,7 @@ module.exports = app => {
                 toppingsAdded.push(topping);
                 Pizzas.findByIdAndUpdate(
                   id,
-                  { toppings: [...new Set(toppingsAdded)] },
+                  { toppings: toppingsAdded },
                   { new: true }
                 )
                   .then(result => res.status(200).json(result))
