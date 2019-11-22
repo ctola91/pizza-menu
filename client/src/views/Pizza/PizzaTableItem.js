@@ -1,6 +1,7 @@
 import React, { Component, createRef } from "react";
 import { Table, Button, Input } from "semantic-ui-react";
 import { object, func } from "prop-types";
+import { Link } from 'react-router-dom';
 
 class PizzaTableItem extends Component {
   ref = createRef(null);
@@ -40,7 +41,7 @@ class PizzaTableItem extends Component {
           <Table.Cell>{pizza._id}</Table.Cell>
           <Table.Cell>
             {!this.state.isEditing ? (
-              pizza.name
+              <Link to={`/pizzas/${pizza._id}`}>{pizza.name}</Link>
             ) : (
               <Input focus onChange={this.handleOnChange}  />
             )}

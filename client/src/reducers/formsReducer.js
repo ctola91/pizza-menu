@@ -1,7 +1,7 @@
 import { createForms } from "react-redux-form";
 
 const initialForm = {
-  name: ""
+  name: "",
 };
 export default function formsReducer() {
   return createForms({

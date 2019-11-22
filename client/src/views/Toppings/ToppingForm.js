@@ -12,9 +12,9 @@ class ToppingForm extends Component {
 
   handleAddNewTopping = values => {
     console.log(values)
-    const { addToppingByPizza } = this.props;
+    const { addTopping } = this.props;
     if (values.name) {
-      addToppingByPizza({
+      addTopping({
         name: values.name,
         pizza: values.pizza
       });
@@ -49,16 +49,14 @@ class ToppingForm extends Component {
                 }}
               />
             </label>
-            <Control.select
+            {/* <Control.select
               model=".pizza"
-              validators={{
-                required
-              }}
             >
+              <option value={0} disabled>Select a Pizza</option>
               {pizzas.map(pizza => (
                 <option value={pizza._id} key={pizza._id}>{pizza.name}</option>
               ))}
-            </Control.select>
+            </Control.select> */}
           </div>
           <Errors
             model=".name"

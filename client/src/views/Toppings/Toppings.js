@@ -33,7 +33,7 @@ class Toppings extends Component {
             <Grid.Row>
               <Grid.Column width={4}>
                 <h3>Add Topping</h3>
-                <ToppingForm pizzas={pizzas} addToppingByPizza={addToppingByPizza} resetToppingForm={resetToppingForm} />
+                <ToppingForm pizzas={pizzas} addTopping={addTopping} resetToppingForm={resetToppingForm} />
                 <h3>Filter By Pizza</h3>
                 <ToppingsFilter
                   toppings={toppings}
