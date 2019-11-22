@@ -4,11 +4,23 @@ module.exports = app => {
   app
     .route("/pizzas")
     .get((req, res) => {
-      Pizzas.find({})
-        .then(result => res.json(result))
-        .catch(error => {
-          res.status(412).json({ msg: error.message });
-        });
+      let perPage = Number(req.query.limit) || 5;
+      let page = req.query.page || 0;
+      let sort = req.query.sort || "asc";
+      Pizzas.countDocuments({})
+        .then(count => {
+          Pizzas.find({})
+            .limit(perPage)
+            .skip(perPage * page)
+            .sort({
+              name: sort
+            })
+            .then(result => res.json({ total: count, pizzas: result }))
+            .catch(error => {
+              res.status(412).json({ msg: error.message });
+            });
+        })
+        .catch();
     })
     .post((req, res) => {
       Pizzas.create(req.body)
@@ -21,10 +33,11 @@ module.exports = app => {
   app
     .route("/pizzas/:id")
     .get((req, res) => {
-      Pizzas.findOne({ _id: req.params.id }).populate('toppings')
+      Pizzas.findOne({ _id: req.params.id })
+        .populate("toppings")
         .then(result => {
-          Toppings.find({})  
-          res.json(result)
+          Toppings.find({});
+          res.json(result);
         })
         .catch(error => {
           res.status(404).json({ msg: error.message });
@@ -52,11 +65,9 @@ module.exports = app => {
                     res.status(400).json({ msg: error.message });
                   });
               } else {
-                res
-                  .status(406)
-                  .json({
-                    msg: `currently Topping '${topping.name}' was added to pizza.`
-                  });
+                res.status(406).json({
+                  msg: `currently Topping '${topping.name}' was added to pizza.`
+                });
               }
             })
             .catch(err => {
@@ -67,14 +78,14 @@ module.exports = app => {
           res.status(412).json({ msg: err.message });
         });
     })
+    // .delete((req, res) => {
+    //   Pizzas.findByIdAndRemove({ _id: req.params.id })
+    //     .then(result => res.sendStatus(204))
+    //     .catch(error => {
+    //       res.status(412).json({ msg: error.message });
+    //     });
+    // })
     .delete((req, res) => {
-      Pizzas.findByIdAndRemove({ _id: req.params.id })
-        .then(result => res.sendStatus(204))
-        .catch(error => {
-          res.status(412).json({ msg: error.message });
-        });
-    })
-    .put((req, res) => {
       let id = req.params.id;
 
       Pizzas.findByIdAndUpdate(id, req.body, { new: true })
