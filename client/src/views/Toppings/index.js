@@ -8,7 +8,6 @@ import {
   fetchToppings,
   updateTopping,
   resetToppingForm,
-  addToppingByPizza,
   fetchToppingsByPizza
 } from "../../actions/toppingActions";
 import { fetchPizzas } from '../../actions/pizzaActions';
@@ -20,7 +19,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       addTopping,
-      addToppingByPizza,
       fetchToppingsByPizza,
       deleteTopping,
       fetchTopping,

@@ -3,7 +3,6 @@ import {
   ADD_TOPPING_SUCCESS,
   DELETE_TOPPING_SUCCESS,
   UPDATE_TOPPING_SUCCESS,
-  ADD_TOPPING_BY_PIZZA_SUCCESS,
   FETCH_TOPPINGS_BY_PIZZA_SUCCESS
 } from "../actions/actionTypes";
 import { getNewState } from "../shared/utils/frontend";
@@ -53,13 +52,7 @@ export default function toppingReducer(state = initialState, action) {
         toppings,
       });
     }
-    case ADD_TOPPING_BY_PIZZA_SUCCESS: {
-      const { payload: topping } = action;
-      const newToppings = [...state.toppings, topping];
-      return getNewState(state, {
-        toppings: newToppings,
-      });
-    }
+  
     default:
       return state;
   }

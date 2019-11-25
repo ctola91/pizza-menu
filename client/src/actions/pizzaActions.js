@@ -1,4 +1,4 @@
-import { request, received, error } from '../shared/redux/baseActions';
+import { request, received, error } from "../shared/redux/baseActions";
 import {
   FETCH_PIZZAS_REQUEST,
   FETCH_PIZZAS_SUCCESS,
@@ -15,9 +15,12 @@ import {
   DELETE_PIZZA_SUCCESS,
   DELETE_PIZZA_REQUEST,
   DELETE_PIZZA_ERROR,
-} from './actionTypes';
-import PizzaService from '../services/PizzaService';
-import { actions } from 'react-redux-form';
+  ADD_TOPPING_TO_PIZZA_REQUEST,
+  ADD_TOPPING_TO_PIZZA_SUCCESS,
+  ADD_TOPPING_TO_PIZZA_ERROR
+} from "./actionTypes";
+import PizzaService from "../services/PizzaService";
+import { actions } from "react-redux-form";
 
 export const fetchPizzas = () => async dispatch => {
   dispatch(request(FETCH_PIZZAS_REQUEST));
@@ -27,7 +30,7 @@ export const fetchPizzas = () => async dispatch => {
   } catch (err) {
     dispatch(error(FETCH_PIZZAS_ERROR));
     // eslint-disable-next-line
-    console.log('AXIOS_ERROR', err.response);
+    console.log("AXIOS_ERROR", err.response);
   }
 };
 
@@ -39,7 +42,7 @@ export const addPizza = pizza => async dispatch => {
   } catch (err) {
     dispatch(request(ADD_PIZZA_ERROR));
     // eslint-disable-next-line
-    console.log('AXIOS_ERROR:', err.response);
+    console.log("AXIOS_ERROR:", err.response);
   }
 };
 
@@ -51,7 +54,7 @@ export const fetchPizza = id => async dispatch => {
   } catch (err) {
     dispatch(error(FETCH_PIZZA_ERROR));
     // eslint-disable-next-line
-    console.log('AXIOS_ERROR:', err.response);
+    console.log("AXIOS_ERROR:", err.response);
   }
 };
 
@@ -63,7 +66,7 @@ export const updatePizza = pizza => async dispatch => {
   } catch (err) {
     dispatch(error(UPDATE_PIZZA_ERROR));
     // eslint-disable-next-line
-    console.log('AXIOS_ERROR:', err.response);
+    console.log("AXIOS_ERROR:", err.response);
   }
 };
 
@@ -75,10 +78,22 @@ export const deletePizza = id => async dispatch => {
   } catch (err) {
     dispatch(error(DELETE_PIZZA_ERROR));
     // eslint-disable-next-line
-    console.log('AXIOS_ERROR:', err.response);
+    console.log("AXIOS_ERROR:", err.response);
+  }
+};
+
+export const addToppingToPizza = (pizzaId, toppingId) => async dispatch => {
+  dispatch(request(ADD_TOPPING_TO_PIZZA_REQUEST));
+  try {
+    const response = await PizzaService.addToppingToPizza(pizzaId, toppingId);
+    dispatch(received(ADD_TOPPING_TO_PIZZA_SUCCESS, response.data));
+  } catch (err) {
+    dispatch(error(ADD_TOPPING_TO_PIZZA_ERROR));
+    // eslint-disable-next-line
+    console.log("AXIOS_ERROR:", err.response);
   }
 };
 
 export const resetPizzaForm = () => dispatch => {
-  dispatch(actions.reset('pizzaForm'));
+  dispatch(actions.reset("pizzaForm"));
 };

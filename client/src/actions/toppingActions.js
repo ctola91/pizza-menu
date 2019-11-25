@@ -18,9 +18,6 @@ import {
   FETCH_TOPPINGS_BY_PIZZA_ERROR,
   FETCH_TOPPINGS_BY_PIZZA_REQUEST,
   FETCH_TOPPINGS_BY_PIZZA_SUCCESS,
-  ADD_TOPPING_BY_PIZZA_ERROR,
-  ADD_TOPPING_BY_PIZZA_REQUEST,
-  ADD_TOPPING_BY_PIZZA_SUCCESS
 } from "./actionTypes";
 import ToppingService from "../services/ToppingService";
 import { actions } from "react-redux-form";
@@ -85,17 +82,6 @@ export const deleteTopping = id => async dispatch => {
   }
 };
 
-export const addToppingByPizza = (topping) => async dispatch => {
-  dispatch(request(ADD_TOPPING_BY_PIZZA_REQUEST));
-  try {
-    const response = await ToppingService.addToppingByPizza(topping);
-    dispatch(received(ADD_TOPPING_BY_PIZZA_SUCCESS, response.data));
-  } catch (err) {
-    dispatch(error(ADD_TOPPING_BY_PIZZA_ERROR));
-    console.log("AXIOS_ERROR", err.response);
-  }
-};
-
 export const fetchToppingsByPizza = id => async dispatch => {
   dispatch(request(FETCH_TOPPINGS_BY_PIZZA_REQUEST));
   try {
@@ -109,4 +95,8 @@ export const fetchToppingsByPizza = id => async dispatch => {
 
 export const resetToppingForm = () => dispatch => {
   dispatch(actions.reset("toppingForm"));
+};
+
+export const resetAddToppingToPizzaForm = () => dispatch => {
+  dispatch(actions.reset("addToppingToPizzaForm"));
 };

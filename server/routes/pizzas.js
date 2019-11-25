@@ -58,6 +58,7 @@ module.exports = app => {
                   { toppings: toppingsAdded },
                   { new: true }
                 )
+                  .populate("toppings")
                   .then(result => res.status(200).json(result))
                   .catch(error => {
                     res.status(400).json({ msg: error.message });

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Grid } from "semantic-ui-react";
 import PizzaDetailTable from "./PizzaDetailTable";
+import PizzaDetailAddTopping from "./PizzaDetailAddTopping";
 
 class PizzaDetail extends Component {
   componentDidMount() {
@@ -8,13 +9,21 @@ class PizzaDetail extends Component {
       match: {
         params: { id }
       },
-      fetchPizza
+      fetchPizza,
+      fetchToppings
     } = this.props;
     fetchPizza(id);
+    fetchToppings();
   }
 
   render() {
-    const { selectedPizza, deleteToppingFromPizza } = this.props;
+    const {
+      selectedPizza,
+      deleteToppingFromPizza,
+      toppings,
+      addToppingToPizza,
+      resetAddToppingToPizzaForm
+    } = this.props;
     console.log(selectedPizza);
     return (
       <>
@@ -24,10 +33,12 @@ class PizzaDetail extends Component {
             <Grid.Row>
               <Grid.Column width={4}>
                 <h3>Add Topping to this Pizza</h3>
-                {/* <PizzaForm
-                  addPizza={addPizza}
-                  resetPizzaForm={resetPizzaForm}
-                /> */}
+                <PizzaDetailAddTopping
+                  toppings={toppings}
+                  resetAddToppingToPizzaForm={resetAddToppingToPizzaForm}
+                  pizza={selectedPizza}
+                  addToppingToPizza={addToppingToPizza}
+                />
               </Grid.Column>
               <Grid.Column width={8}>
                 <h3>Pizza</h3>
@@ -39,11 +50,6 @@ class PizzaDetail extends Component {
                 ) : (
                   <p>There is no toppings added to this pizza.</p>
                 )}
-                {/* <PizzaTable
-                  pizzas={pizzas}
-                  deletePizza={deletePizza}
-                  updatePizza={updatePizza}
-                /> */}
               </Grid.Column>
             </Grid.Row>
           </Grid>
