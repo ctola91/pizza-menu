@@ -25,7 +25,7 @@ import {
 import PizzaService from "../services/PizzaService";
 import { actions } from "react-redux-form";
 
-export const fetchPizzas = (limit = 5, page = 0) => async dispatch => {
+export const fetchPizzas = (limit, page) => async dispatch => {
   dispatch(request(FETCH_PIZZAS_REQUEST));
   try {
     const response = await PizzaService.getPizzas(limit, page);

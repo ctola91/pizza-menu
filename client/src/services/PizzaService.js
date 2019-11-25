@@ -2,7 +2,7 @@ import API from "../api/api";
 
 const URL_PIZZAS = "/pizzas";
 
-const getPizzas = async (limit = 5, page = 0) => {
+const getPizzas = async (limit = 20, page = 0) => {
   const response = await API.get(`${URL_PIZZAS}?limit=${limit}&page=${page}`);
   if (response.error) {
     throw new Error("an error occurred");
