@@ -37,7 +37,6 @@ class ToppingsTableItem extends Component {
     return (
       <>
         <Table.Row>
-          <Table.Cell>{topping._id}</Table.Cell>
           <Table.Cell>
             {!this.state.isEditing ? (
               topping.name

@@ -38,7 +38,6 @@ class PizzaTableItem extends Component {
     return (
       <>
         <Table.Row>
-          <Table.Cell>{pizza._id}</Table.Cell>
           <Table.Cell>
             {!this.state.isEditing ? (
               <Link to={`/pizzas/${pizza._id}`}>{pizza.name}</Link>

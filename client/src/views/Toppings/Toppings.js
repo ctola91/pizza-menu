@@ -34,14 +34,14 @@ class Toppings extends Component {
               <Grid.Column width={4}>
                 <h3>Add Topping</h3>
                 <ToppingForm pizzas={pizzas} addTopping={addTopping} resetToppingForm={resetToppingForm} />
-                <h3>Filter By Pizza</h3>
+                {/* <h3>Filter By Pizza</h3>
                 <ToppingsFilter
                   toppings={toppings}
                   pizzas={pizzas}
                   fetchPizzas={fetchPizzas}
                   fetchToppings={fetchToppings}
                   fetchToppingsByPizza={fetchToppingsByPizza}
-                />
+                /> */}
               </Grid.Column>
               <Grid.Column width={8}>
                 <h3>Toppings list</h3>
