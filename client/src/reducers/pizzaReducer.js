@@ -21,7 +21,7 @@ export default function pizzaReducer(state = initialState, action) {
       const { payload: pizzas } = action;
       return getNewState(state, {
         pizzas: pizzas.pizzas,
-        total: pizzas.pizzas.length
+        total: pizzas.total
       });
     }
     case ADD_PIZZA_SUCCESS: {

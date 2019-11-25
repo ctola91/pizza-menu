@@ -5,26 +5,20 @@ import { Container, Grid } from "semantic-ui-react";
 import PizzaTable from "./PizzaTable";
 import PizzaForm from "./PizzaForm";
 class Pizza extends Component {
-  constructor() {
-    super();
-    this.state = {
-      page: 0,
-      limit: 5,
-    }
-  }
-
   componentDidMount() {
     const { fetchPizzas } = this.props;
-    fetchPizzas(this.state.limit, this.state.page);
+    fetchPizzas();
   }
 
   render() {
     const {
       pizzas,
+      total,
       deletePizza,
       updatePizza,
       addPizza,
-      resetPizzaForm
+      resetPizzaForm,
+      fetchPizzas
     } = this.props;
     return (
       <div>
@@ -45,6 +39,8 @@ class Pizza extends Component {
                   pizzas={pizzas}
                   deletePizza={deletePizza}
                   updatePizza={updatePizza}
+                  fetchPizzas={fetchPizzas}
+                  total={total}
                 />
               </Grid.Column>
             </Grid.Row>

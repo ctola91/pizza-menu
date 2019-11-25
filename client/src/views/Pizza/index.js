@@ -11,7 +11,7 @@ import {
 } from "../../actions/pizzaActions";
 import Pizza from "./Pizza";
 
-const mapStateToProps = ({ pizza }) => ({ pizzas: pizza.pizzas });
+const mapStateToProps = ({ pizza }) => ({ pizzas: pizza.pizzas, total: pizza.total });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

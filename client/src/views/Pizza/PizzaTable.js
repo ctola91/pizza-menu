@@ -4,10 +4,11 @@ import PizzaTableItem from './PizzaTableItem';
 
 import { isFirstRender } from '../../shared/utils/frontend';
 import PizzaTableHeader from './PizzaTableHeader';
+import PizzaTableFooter from './PizzaTableFooter';
 
 class PizzaTable extends PureComponent {
   render() {
-    const { pizzas, deletePizza, updatePizza } = this.props;
+    const { pizzas, total, deletePizza, updatePizza, fetchPizzas } = this.props;
     return (
       <>
         {isFirstRender(pizzas) ? (
@@ -20,6 +21,7 @@ class PizzaTable extends PureComponent {
             <PizzaTableItem pizza={pizza} key={pizza._id} deletePizza={deletePizza} updatePizza={updatePizza} />
           ))}
         </Table.Body>
+        <PizzaTableFooter fetchPizzas={fetchPizzas} total={total} />
       </Table>
     )}
       </>
