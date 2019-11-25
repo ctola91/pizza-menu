@@ -8,7 +8,7 @@ import {
 import {
   fetchPizzas,
   fetchPizza,
-  addToppingToPizza
+  addToppingToPizza,
 } from "../../actions/pizzaActions";
 import PizzaDetail from "./PizzaDetail";
 
@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch =>
       fetchPizza,
       fetchToppings,
       resetAddToppingToPizzaForm,
-      addToppingToPizza
+      addToppingToPizza,
     },
     dispatch
   );

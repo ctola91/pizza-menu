@@ -19,7 +19,6 @@ class PizzaDetail extends Component {
   render() {
     const {
       selectedPizza,
-      deleteToppingFromPizza,
       toppings,
       addToppingToPizza,
       resetAddToppingToPizzaForm
@@ -45,7 +44,6 @@ class PizzaDetail extends Component {
                 {selectedPizza && selectedPizza.toppings.length > 0 ? (
                   <PizzaDetailTable
                     toppings={selectedPizza.toppings}
-                    deleteToppingFromPizza={deleteToppingFromPizza}
                   />
                 ) : (
                   <p>There is no toppings added to this pizza.</p>

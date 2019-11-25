@@ -12,6 +12,7 @@ class PizzaDetailAddTopping extends Component {
 
   componentDidUpdate(prevProps) {
     if (
+      prevProps &&
       prevProps.toppings &&
       prevProps.toppings.length != this.props.toppings.length
     )
@@ -20,8 +21,6 @@ class PizzaDetailAddTopping extends Component {
 
   handleSubmit = values => {
     const { pizza, addToppingToPizza, resetAddToppingToPizzaForm } = this.props;
-    console.log(values);
-    console.log(pizza);
     addToppingToPizza(pizza._id, values.topping);
     resetAddToppingToPizzaForm();
     this.filterToppings();
@@ -33,9 +32,9 @@ class PizzaDetailAddTopping extends Component {
 
   filterToppings = () => {
     const { toppings, pizza } = this.props;
-    const filtered = toppings.filter(topping => {
+    let filtered = toppings.filter(topping => {
       return pizza.toppings.some(t => {
-        return t._id !== topping._id;
+        return t._id === topping._id;
       });
     });
     this.setState(() => ({

@@ -5,9 +5,17 @@ import { Container, Grid } from "semantic-ui-react";
 import PizzaTable from "./PizzaTable";
 import PizzaForm from "./PizzaForm";
 class Pizza extends Component {
+  constructor() {
+    super();
+    this.state = {
+      page: 0,
+      limit: 5,
+    }
+  }
+
   componentDidMount() {
     const { fetchPizzas } = this.props;
-    fetchPizzas();
+    fetchPizzas(this.state.limit, this.state.page);
   }
 
   render() {

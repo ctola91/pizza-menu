@@ -17,15 +17,18 @@ import {
   DELETE_PIZZA_ERROR,
   ADD_TOPPING_TO_PIZZA_REQUEST,
   ADD_TOPPING_TO_PIZZA_SUCCESS,
-  ADD_TOPPING_TO_PIZZA_ERROR
+  ADD_TOPPING_TO_PIZZA_ERROR,
+  DELETE_TOPPING_FROM_PIZZA_REQUEST,
+  DELETE_TOPPING_FROM_PIZZA_SUCCESS,
+  DELETE_TOPPING_FROM_PIZZA_ERROR
 } from "./actionTypes";
 import PizzaService from "../services/PizzaService";
 import { actions } from "react-redux-form";
 
-export const fetchPizzas = () => async dispatch => {
+export const fetchPizzas = (limit = 5, page = 0) => async dispatch => {
   dispatch(request(FETCH_PIZZAS_REQUEST));
   try {
-    const response = await PizzaService.getPizzas();
+    const response = await PizzaService.getPizzas(limit, page);
     dispatch(received(FETCH_PIZZAS_SUCCESS, response.data));
   } catch (err) {
     dispatch(error(FETCH_PIZZAS_ERROR));
@@ -89,6 +92,18 @@ export const addToppingToPizza = (pizzaId, toppingId) => async dispatch => {
     dispatch(received(ADD_TOPPING_TO_PIZZA_SUCCESS, response.data));
   } catch (err) {
     dispatch(error(ADD_TOPPING_TO_PIZZA_ERROR));
+    // eslint-disable-next-line
+    console.log("AXIOS_ERROR:", err.response);
+  }
+};
+
+export const deleteToppingFromPizza = (pizzaId, toppingId) => async dispatch => {
+  dispatch(request(DELETE_TOPPING_FROM_PIZZA_REQUEST));
+  try {
+    const response = await PizzaService.deleteToppingFromPizza(pizzaId, toppingId);
+    dispatch(received(DELETE_TOPPING_FROM_PIZZA_SUCCESS, response.data));
+  } catch (err) {
+    dispatch(error(DELETE_TOPPING_FROM_PIZZA_ERROR));
     // eslint-disable-next-line
     console.log("AXIOS_ERROR:", err.response);
   }

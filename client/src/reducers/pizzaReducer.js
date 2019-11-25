@@ -4,7 +4,8 @@ import {
   DELETE_PIZZA_SUCCESS,
   UPDATE_PIZZA_SUCCESS,
   FETCH_PIZZA_SUCCESS,
-  ADD_TOPPING_TO_PIZZA_SUCCESS
+  ADD_TOPPING_TO_PIZZA_SUCCESS,
+  DELETE_TOPPING_FROM_PIZZA_SUCCESS
 } from "../actions/actionTypes";
 import { getNewState } from "../shared/utils/frontend";
 
@@ -63,6 +64,12 @@ export default function pizzaReducer(state = initialState, action) {
       const { payload: selectedPizza } = action;
       return getNewState(state, {
         selectedPizza: selectedPizza,
+      });
+    }
+    case DELETE_TOPPING_FROM_PIZZA_SUCCESS: {
+      const { payload: selectedPizza } = action;
+      return getNewState(state, {
+        selectedPizza
       });
     }
     default:

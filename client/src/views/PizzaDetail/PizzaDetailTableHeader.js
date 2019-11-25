@@ -8,7 +8,6 @@ class PizzaDetailTableHeader extends PureComponent {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Actions</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
       </>

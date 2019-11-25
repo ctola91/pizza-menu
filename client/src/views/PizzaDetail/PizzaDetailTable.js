@@ -5,7 +5,7 @@ import PizzaDetailTableItem from './PizzaDetailTableItem';
 
 class PizzaDetailTable extends PureComponent {
   render() {
-    const { toppings, deleteToppingFromPizza } = this.props;
+    const { pizza, toppings, deleteToppingFromPizza, updateTopping } = this.props;
     return (
       <>
         <Table>
@@ -15,7 +15,6 @@ class PizzaDetailTable extends PureComponent {
               <PizzaDetailTableItem
                 topping={topping}
                 key={topping._id}
-                deleteToppingFromPizza={deleteToppingFromPizza}
               />
             ))}
           </Table.Body>

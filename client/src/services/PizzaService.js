@@ -2,8 +2,8 @@ import API from "../api/api";
 
 const URL_PIZZAS = "/pizzas";
 
-const getPizzas = async () => {
-  const response = await API.get(`${URL_PIZZAS}`);
+const getPizzas = async (limit = 5, page = 0) => {
+  const response = await API.get(`${URL_PIZZAS}?limit=${limit}&page=${page}`);
   if (response.error) {
     throw new Error("an error occurred");
   }
@@ -52,11 +52,22 @@ const addToppingToPizza = async (pizzaId, toppingId) => {
   return response;
 };
 
+const deleteToppingFromPizza = async (pizzaId, toppingId) => {
+  const response = await API.put(`${URL_PIZZAS}/${pizzaId}`, {
+    topping: toppingId
+  });
+  if (response.error) {
+    throw new Error("an error occurred while is updating");
+  }
+  return response;
+}
+
 export default {
   getPizza,
   getPizzas,
   addPizza,
   deletePizza,
   updatePizza,
-  addToppingToPizza
+  addToppingToPizza,
+  deleteToppingFromPizza
 };
